@@ -35,8 +35,11 @@ struct MenuView: View {
                 Spacer()
             }
             ForEach(dishes, id: \.self) { dish in
-                MenuRawView(dish: dish)
-                    .padding(.top, 12)
+                NavigationLink(destination: DetailView(dish: dish)) {
+                    MenuRawView(dish: dish)
+                        .padding(.top, 12)
+                        .foregroundStyle(Color("CustomGray"))
+                }
             }
         }
     }

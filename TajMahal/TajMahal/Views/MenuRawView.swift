@@ -13,6 +13,7 @@ struct MenuRawView: View {
         HStack(spacing: 24) {
             Image(dish.imageName)
                 .resizable()
+                .aspectRatio(contentMode: .fill)
                 .frame(width: 112, height: 86)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
             VStack(alignment: .leading, spacing: 8) {
@@ -23,6 +24,7 @@ struct MenuRawView: View {
                     .font(Font.custom("PlusJakartaSans-VariableFont_wght", size: 12))
                     .foregroundStyle(.secondary)
                     .padding(.bottom, 4)
+                    .multilineTextAlignment(.leading)
                 HStack {
                     Text("\(dish.price, format: .currency(code: "EUR"))")
                     Spacer()
