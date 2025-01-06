@@ -13,12 +13,37 @@ struct MenuView: View {
     let viewModel: ViewModel = ViewModel()
     
     var body: some View {
-        List {
-            // À completer
+        VStack {
+            Text("Menu")
+                .font(Font.system(size: 23))
+                .fontWeight(.bold)
+            ScrollView(showsIndicators: false) {
+                recipeView("Entrées", dishes: viewModel.apetizerArray)
+                    .padding(.bottom, 24)
+                recipeView("Plats Principaux", dishes: viewModel.mainCourseArray)
+            }
+        }
+        .padding(20)
+        .background(Color(.systemGray5))
+    }
+    
+    @ViewBuilder
+    func recipeView(_ name: String, dishes: [Dish]) -> some View {
+        VStack {
+            HStack {
+                Text(name)
+                Spacer()
+            }
+            ForEach(dishes, id: \.self) { dish in
+                MenuRawView(dish: dish)
+                    .padding(.top, 12)
+            }
         }
     }
 }
 
 #Preview {
-    MenuView()
+    NavigationStack {
+        MenuView()
+    }
 }
