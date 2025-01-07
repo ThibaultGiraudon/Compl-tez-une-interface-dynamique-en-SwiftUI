@@ -9,54 +9,58 @@ import SwiftUI
 
 // Page d'accueil
 struct WelcomeView: View {
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
         NavigationStack {
             VStack {
                 Image("TajMahal")
                     .resizable()
-                VStack {
+                    .aspectRatio(contentMode: .fill)
+                Group {
                     HStack {
                         VStack(alignment: .leading) {
                             Text("Restaurant Indien")
+                                .font(Font.custom("PlusJakartaSans-Regular", size: 14))
                             Text("Taj Mahal")
                                 .fontWeight(.bold)
-                                .font(Font.system(size: 23))
+                                .font(Font.custom("PlusJakartaSans-Regular", size: 23))
+                                .foregroundStyle(colorScheme == .dark ? Color.white : Color.black)
                         }
                         Spacer()
-                        Image("Logo")
+                        Image("GrayLogo")
                             .resizable()
                             .frame(width: 40, height: 40)
                     }
-                    .padding(.vertical, 32)
+                    .padding(.vertical, 12)
                     VStack(spacing: 14) {
-                        rawContent(image: "clock", "Mardi", "11h30 - 14h30 · 18h30 - 22h00")
-                        rawContent(image: "frying.pan", "Type de service", "À emporter")
-                        rawContent(image: "mappin.and.ellipse", "12 Avenue de la Brique - 75010 Paris")
-                        rawContent(image: "globe", "www.tajmahal.fr")
-                        rawContent(image: "phone", "06 12 34 56 78")
+                        rawContent(image: "Clock", "Mardi", "11h30 - 14h30 · 18h30 - 22h00")
+                        rawContent(image: "Pan", "Type de service", "À emporter")
+                        rawContent(image: "Pin", "12 Avenue de la Brique - 75010 Paris")
+                        rawContent(image: "Globe", "www.tajmahal.fr")
+                        rawContent(image: "Phone", "06 12 34 56 78")
                     }
-                    .foregroundStyle(.gray)
+                    .font(Font.custom("PlusJakartaSans-Regular", size: 14))
                 }
-                .font(Font.system(size: 15))
+                .font(.caption)
+                NavigationLink {
+                    MenuView()
+                } label : {
+                    Text("Accéder au menu")
+                        .fontWeight(.bold)
+                        .font(Font.system(size: 20))
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                        .background {
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color("CustomRed"))
+                        }
+                        .padding(.top, 24)
+                }
             }
+            .foregroundStyle(Color("CustomGray"))
             .padding(.horizontal, 18)
-            Spacer()
-            NavigationLink {
-                MenuView()
-            } label : {
-                Text("Accéder au menu")
-                    .fontWeight(.bold)
-                    .font(Font.system(size: 20))
-                    .foregroundStyle(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 10)
-                    .background {
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color("CustomRed"))
-                    }
-                    .padding(.horizontal, 20)
-                    .padding(.top, 32)
-            }
+            .background(Color("OffWhite"))
         }
     }
     
@@ -64,7 +68,7 @@ struct WelcomeView: View {
     @ViewBuilder
     func rawContent(image name: String, _ left: String, _ right: String) -> some View {
         HStack {
-            Image(systemName: name)
+            Image(name)
                 .resizable()
                 .frame(width: 12, height: 12)
             Text(left)
@@ -76,7 +80,7 @@ struct WelcomeView: View {
     @ViewBuilder
     func rawContent(image name: String, _ left: String) -> some View {
         HStack {
-            Image(systemName: name)
+            Image(name)
                 .resizable()
                 .frame(width: 12, height: 12)
             Text(left)
@@ -86,5 +90,7 @@ struct WelcomeView: View {
 }
 
 #Preview {
-    WelcomeView()
+    NavigationStack {
+        WelcomeView()
+    }
 }

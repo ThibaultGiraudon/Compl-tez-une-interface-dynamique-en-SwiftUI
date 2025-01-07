@@ -7,9 +7,12 @@
 
 import SwiftUI
 
+// vue detaillé du plat avec les ingrédients et allergènes
 struct DetailView: View {
+    // Variable d'environement qui permet de revenir vers la page précédante
     @Environment(\.dismiss) var dismiss
     var dish: Dish
+    
     var body: some View {
         VStack {
             HStack {
@@ -17,11 +20,13 @@ struct DetailView: View {
                     dismiss()
                 } label: {
                     Image(systemName: "chevron.left")
-                        .foregroundStyle(Color("CustomGray"))
                 }
                 Text(dish.name)
                 Spacer()
             }
+            .font(Font.custom("PlusJakartaSans-Bold", size: 18))
+            .fontWeight(.bold)
+            .foregroundStyle(Color("DarkGray"))
             .padding(.top)
             Spacer()
             ZStack(alignment: .topTrailing) {
@@ -31,10 +36,9 @@ struct DetailView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                 HStack {
                     ForEach(1...3, id: \.self) {
-                        Image(systemName: "star.fill")
+                        Image(dish.ratingSpice >= $0 ? "RedPepper" : "GrayPepper")
                             .resizable()
                             .frame(width: 14, height: 14)
-                            .foregroundStyle(dish.ratingSpice >= $0 ? Color("CustomRed") : Color("CustomGray"))
                     }
                 }
                 .padding(.horizontal, 8)
@@ -57,10 +61,11 @@ struct DetailView: View {
                 Text(dish.ingredients)
             }
             .foregroundStyle(Color("CustomGray"))
-            .font(Font.system(size: 12))
+            .font(Font.custom("PlusJakartaSans-Regular", size: 12))
             Spacer()
         }
         .padding(.horizontal, 20)
+        .background(Color("OffWhite"))
         .navigationBarBackButtonHidden(true)
     }
 }

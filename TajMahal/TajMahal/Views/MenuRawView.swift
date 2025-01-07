@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Ligne de la liste du menu 
 struct MenuRawView: View {
     let dish: Dish
     var body: some View {
@@ -18,10 +19,10 @@ struct MenuRawView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 10))
             VStack(alignment: .leading, spacing: 8) {
                 Text(dish.name)
-                    .font(Font.custom("PlusJakartaSans-VariableFont_wght", size: 14))
+                    .font(Font.custom("PlusJakartaSans-Regular", size: 14))
                     .lineLimit(1)
                 Text(dish.description)
-                    .font(Font.custom("PlusJakartaSans-VariableFont_wght", size: 12))
+                    .font(Font.custom("PlusJakartaSans-Regular", size: 12))
                     .foregroundStyle(.secondary)
                     .padding(.bottom, 4)
                     .multilineTextAlignment(.leading)
@@ -29,8 +30,9 @@ struct MenuRawView: View {
                     Text("\(dish.price, format: .currency(code: "EUR"))")
                     Spacer()
                     ForEach(1...3, id: \.self) {
-                        Image(systemName: "star.fill")
-                            .foregroundStyle(dish.ratingSpice >= $0 ? Color("CustomRed") : .gray)
+                        Image(dish.ratingSpice >= $0 ? "RedPepper" : "GrayPepper")
+                            .resizable()
+                            .frame(width: 14, height: 14)
                     }
                 }
             }
@@ -40,7 +42,7 @@ struct MenuRawView: View {
         .frame(height: 110)
         .background {
             RoundedRectangle(cornerRadius: 16)
-                .fill(.white)
+                .fill(Color("OffWhite"))
         }
     }
 }
