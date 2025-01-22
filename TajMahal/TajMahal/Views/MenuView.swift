@@ -22,13 +22,13 @@ struct MenuView: View {
                 } label: {
                     Image(systemName: "chevron.left")
                         .fontWeight(.bold)
-                        .foregroundStyle(Color("DarkGray"))
+                        .foregroundStyle(Color("CustomDarkGray"))
                 }
                 Spacer()
                 Text("Menu")
                     .font(Font.custom("PlusJakartaSans-Bold", size: 23))
                     .fontWeight(.bold)
-                    .foregroundStyle(Color("DarkGray"))
+                    .foregroundStyle(Color("CustomDarkGray"))
                 Spacer()
             }
             .padding(.top)
@@ -40,7 +40,7 @@ struct MenuView: View {
             }
         }
         .padding(.horizontal, 20)
-        .background(Color("LightGray"))
+        .background(Color("CustomLightGray"))
         .navigationBarBackButtonHidden(true)
     }
     
