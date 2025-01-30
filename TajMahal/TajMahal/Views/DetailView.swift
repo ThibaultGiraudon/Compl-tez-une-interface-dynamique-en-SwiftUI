@@ -26,7 +26,7 @@ struct DetailView: View {
             }
             .font(Font.custom("PlusJakartaSans-Bold", size: 18))
             .fontWeight(.bold)
-            .foregroundStyle(Color("DarkGray"))
+            .foregroundStyle(Color("CustomDarkGray"))
             .padding(.top)
             Spacer()
             ZStack(alignment: .topTrailing) {

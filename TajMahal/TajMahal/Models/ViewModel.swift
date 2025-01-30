@@ -22,4 +22,41 @@ struct ViewModel {
     [Dish(name: "Chicken Tikka Masala", description: "Poulet mariné, grillé et servi dans une sauce masala", allergens: "Lait, yaourt, beurre clarifié (ghee), crème fraîche, crème de coco, ail, oignon", ingredients: "Huile, beurre clarifié (ghee), oignon, ail, gingembre, poudre de curcuma, poudre de cumin, poudre de coriandre, piment en poudre, tomates en purée, crème fraîche, crème de coco, sel, coriandre fraîche", spiceLevel: .medium, price: 5.50, imageName: "Tikka Masala"),
      Dish(name: "Biryani aux légumes", description: "Riz parfumé cuit avec des légumes et des épices", allergens: "Noix de cajou, riz", ingredients: "Riz basmati, légumes assortis (carottes, petits pois, haricots verts), noix de cajou, raisins secs, gingembre, poudre de curcuma, poudre de cumin, poudre de coriandre, piment en poudre", spiceLevel: .medium, price: 5.50, imageName: "Biryani"),
      Dish(name: "Rogan Josh", description: "Agneau mijoté dans une sauce épicée", allergens: "Ail, oignon", ingredients: "Agneau, oignons, ail, gingembre, poudre de curcuma, poudre de cumin, poudre de coriandre, piment en poudre, tomates en purée, huile, coriandre fraîche", spiceLevel: .hot, price: 5.50, imageName: "Rogan Josh")]
+    
+    var allergenArray : [String] {
+        var allergensSet = [String]()
+        for dish in mainCourseArray {
+            dish.allergens.split(separator: ",").forEach {
+                let substring = String($0)
+                let trimmedSubstring = substring.trimmingPrefix(" ")
+                let finalSubstring = String(trimmedSubstring).capitalizingFirstLetter()
+                if allergensSet.contains(finalSubstring) == false {
+                    
+                    allergensSet.append(finalSubstring)
+                }
+            }
+        }
+        for dish in apetizerArray {
+            dish.allergens.split(separator: ",").forEach {
+                let substring = String($0)
+                let trimmedSubstring = substring.trimmingPrefix(" ")
+                let finalSubstring = String(trimmedSubstring).capitalizingFirstLetter()
+                if allergensSet.contains(finalSubstring) == false {
+                    
+                    allergensSet.append(finalSubstring)
+                }
+            }
+        }
+        return allergensSet
+    }
+}
+
+extension String {
+    func capitalizingFirstLetter() -> String {
+        return prefix(1).capitalized + self.dropFirst()
+    }
+    
+    mutating func capitalizeFirstLetter() {
+        self = capitalizingFirstLetter()
+    }
 }
